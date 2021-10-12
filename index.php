@@ -60,8 +60,8 @@
 	    ajax.onreadystatechange = function () {
 	        if (this.readyState == 4 && this.status == 200)
 	        {
-	            nim="";
-	        	nama="";
+	            document.getElementById('nim').value="";
+	        	document.getElementById('nama').value="";
 	        	alert(this.responseText);
 	        	location.reload();
 	        }
@@ -98,7 +98,9 @@
 	    ajax.onreadystatechange = function () {
 	        if (this.readyState == 4 && this.status == 200)
 	        {
-	        	alert(this.responseText);
+	        	var data = JSON.parse(this.responseText);
+	        	document.getElementById('nim').value = data.nim;
+	        	document.getElementById('nama').value = data.nama;
 	        }
 	    };
 	 

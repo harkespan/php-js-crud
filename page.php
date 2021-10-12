@@ -3,21 +3,38 @@
 	include 'fungsi.php';
 
 	switch ($_POST['type']) {
-		case 'add': $data = ['nim'=>$_POST['nim'],'nama'=>$_POST['nama']];
-					$cek = modify('insert','mahasiswa',$data);
-					if($cek==TRUE)
+		case 'add': 
+					$data = ['nim'=>$_POST['nim'],'nama'=>$_POST['nama']];
+					$cekdata = getData('nim',$_POST['nim']);
+					if($cekdata->rowCount()==0)
 					{
-						echo "Data berhasil diinput";
+						$cek = modify('insert','mahasiswa',$data);
+						if($cek==TRUE)
+						{
+							echo "Data berhasil diinput";
+						}
+						else
+						{
+							echo "Data gagal diinput";
+						}
 					}
 					else
 					{
-						echo "Data gagal diinput";
+						$cekupdate = modify('update','mahasiswa',$data,'nim');
+						if($cekupdate)
+						{
+							echo "Data berhasil diupdate";
+						}
+						else
+						{
+							echo "Data gagal diupdate";
+						}
 					}
 			break;
 		case 'delete' :
 					$postid = explode("|", base64_decode($_POST['id']));
 					$id = $postid[1];
-					$cek = modify('delete','mahasiswa',null,'id',$id);
+					$cek = modify('delete','mahasiswa',[$id],'id');
 					if($cek==TRUE)
 					{
 						echo "Data berhasil dihapus";
@@ -30,8 +47,8 @@
 		case 'edit' :
 					$postid = explode("|", base64_decode($_POST['id']));
 					$id = $postid[1];
-					$cek = getData($id);
-					if($cek==FALSE)
+					$cek = getData('id',$id);
+					if($cek->rowCount()==0)
 					{
 						echo 0;
 					}

@@ -52,8 +52,6 @@
 		{
 			return FALSE;
 		}
-
-		return $sql;
 	}
 
 

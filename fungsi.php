@@ -32,7 +32,7 @@
 		$conn = db_connect();
 		if($type=='insert')
 		{
-			$sql = "INSERT INTO $table (nim,nama) VALUES (:nim,:nama)";
+			$sql = "INSERT INTO $table (nim,nama,alamat) VALUES (:nim,:nama,:alamat)";
 		}
 		elseif($type=='delete')
 		{

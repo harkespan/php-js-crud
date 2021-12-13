@@ -57,6 +57,7 @@
 							$data = $cek->fetch();
 							echo json_encode($data);
 						}
+				break;
 			default:
 						$cek = getData();
 						if($cek->rowCount()==0)

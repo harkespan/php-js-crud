@@ -64,11 +64,7 @@
 	    ajax.onreadystatechange = function () {
 	        if (this.readyState == 4 && this.status == 200)
 	        {
-	            document.getElementById('nim').value="";
-	        	document.getElementById('nama').value="";
-	        	document.getElementById('alamat').value="";
-	        	alert(this.responseText);
-	        	location.reload();
+
 	        }
 	    };
 	 

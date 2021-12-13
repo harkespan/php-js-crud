@@ -1,11 +1,11 @@
 <?php
-	
+	header("Access-Control-Allow-Origin: *");
 	include 'fungsi.php';
 	if(isset($_POST['type']))
 	{
 		switch ($_POST['type']) {
 			case 'add': 
-						$data = ['nim'=>$_POST['nim'],'nama'=>$_POST['nama']];
+						$data = ['nim'=>$_POST['nim'],'nama'=>$_POST['nama'],'alamat'=>$_POST['alamat']];
 						$cekdata = getData('nim',$_POST['nim']);
 						if($cekdata->rowCount()==0)
 						{
@@ -33,8 +33,7 @@
 						}
 				break;
 			case 'delete' :
-						$postid = explode("|", base64_decode($_POST['id']));
-						$id = $postid[1];
+						$id = $_POST['id'];
 						$cek = modify('delete','mahasiswa',[$id],'id');
 						if($cek==TRUE)
 						{
@@ -46,8 +45,7 @@
 						}
 				break;
 			case 'edit' :
-						$postid = explode("|", base64_decode($_POST['id']));
-						$id = $postid[1];
+						$id = $_POST['id'];
 						$cek = getData('id',$id);
 						if($cek->rowCount()==0)
 						{
@@ -57,8 +55,7 @@
 						{
 							$cek->setFetchMode(PDO::FETCH_ASSOC);
 							$data = $cek->fetch();
-							$d = ['nim'=>$data['nim'],'nama'=>$data['nama']];
-							echo json_encode($d);
+							echo json_encode($data);
 						}
 			default:
 						$cek = getData();

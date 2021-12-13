@@ -10,6 +10,7 @@
 		<form method="POST" onsubmit="return doInsert();">
 	    <input id="nim" placeholder="NIM">
 	    <input id="nama" placeholder="Nama Lengkap">
+	    <input id="alamat" placeholder="Alamat">
 	         
 	    <input type="submit" value="Tambah">
 	</form>
@@ -19,6 +20,7 @@
 			<th>No</th>
 			<th>NIM</th>
 			<th>Nama</th>
+			<th>Alamat</th>
 			<th>Aksi</th>
 		</tr>
 		<?php
@@ -39,7 +41,8 @@
 				<td><?php echo $i?></td>
 				<td><?php echo $baris['nim']?></td>
 				<td><?php echo $baris['nama']?></td>
-				<td><a href="javascript:void(0)" onclick="doEdit('<?php echo base64_encode(md5(rand())."|".$baris['id'])?>')" >Edit</a> | <a href="javascript:void(0)" onclick="doDelete('<?php echo base64_encode(md5(rand())."|".$baris['id'])?>')">Delete</a></td>
+				<td><?php echo $baris['alamat']?>
+				<td><a href="javascript:void(0)" onclick="doEdit('<?php echo $baris['id']?>')" >Edit</a> | <a href="javascript:void(0)" onclick="doDelete('<?php echo $baris['id']?>')">Delete</a></td>
 			</tr>
 			<?php
 					$i++;
@@ -52,6 +55,7 @@
 	function doInsert() {
 	    var nim = document.getElementById('nim').value;
 	    var nama = document.getElementById('nama').value;
+	    var alamat = document.getElementById('alamat').value;
 	         
 	    var ajax = new XMLHttpRequest();
 	    ajax.open("POST", "page.php", true);
@@ -62,12 +66,13 @@
 	        {
 	            document.getElementById('nim').value="";
 	        	document.getElementById('nama').value="";
+	        	document.getElementById('alamat').value="";
 	        	alert(this.responseText);
 	        	location.reload();
 	        }
 	    };
 	 
-	    ajax.send("nim=" + nim + "&nama=" + nama + "&type=add");
+	    ajax.send("nim=" + nim + "&nama=" + nama +"&alamat="+alamat +"&type=add");
 	    return false;
 	}
 
@@ -98,9 +103,11 @@
 	    ajax.onreadystatechange = function () {
 	        if (this.readyState == 4 && this.status == 200)
 	        {
-	        	var data = JSON.parse(this.responseText);
-	        	document.getElementById('nim').value = data.nim;
-	        	document.getElementById('nama').value = data.nama;
+	        	// var data = JSON.parse(this.responseText);
+	        	// document.getElementById('nim').value = data.nim;
+	        	// document.getElementById('nama').value = data.nama;
+	        	// document.getElementById('alamat').value = data.alamat;
+	        	console.log(this.responseText);
 	        }
 	    };
 	 

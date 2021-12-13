@@ -16,7 +16,7 @@
 		$sql = "SELECT * FROM mahasiswa";
 		if(!is_null($id) AND !is_null($field))
 		{
-			$sql .= " WHERE $field=?";
+			$sql .= " WHERE $field=? LIMIT 1";
 			$rs = $conn->prepare($sql);
 			$rs->execute([$id]);
 		}
@@ -40,7 +40,7 @@
 		}
 		elseif($type=='update')
 		{
-			$sql = "UPDATE $table SET nama=:nama WHERE $field = :nim";
+			$sql = "UPDATE $table SET nama=:nama,alamat=:alamat WHERE $field = :nim";
 		}
 
 		$pdo = $conn->prepare($sql)->execute($data);

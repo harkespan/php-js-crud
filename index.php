@@ -103,10 +103,7 @@
 	    ajax.onreadystatechange = function () {
 	        if (this.readyState == 4 && this.status == 200)
 	        {
-	        	// var data = JSON.parse(this.responseText);
-	        	// document.getElementById('nim').value = data.nim;
-	        	// document.getElementById('nama').value = data.nama;
-	        	// document.getElementById('alamat').value = data.alamat;
+
 	        	console.log(this.responseText);
 	        }
 	    };
